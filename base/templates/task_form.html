@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% block content %}
+<main>
+    <section class="d-flex justify-content-center mt-5 pt-5 text-center">
+        <div class="mt-5 bg-info w-50 p-5 border border-dark text-light rounded">
+            <form method="POST" action="">
+                {% csrf_token %}
+                {% for field in form %}
+                <label class="lead me-3" for="">{{field.label}}: </label>
+                {{field}}
+                <p></p>
+                {% endfor %}
+                
+                <a href=""><button class="btn btn-danger" type="submit" >Create</button></a>
+            </form>
+        </div>
+    </section>
+</main>
+    
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+<main>
+    <section class="d-flex flex-column align-items-center p-2" id="main">
+        <div class="d-flex " id="container-1">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                {% for category in categories %}
+                <li><a class="dropdown-item text-danger" href="{% url 'home' %}?q={{category}}">{{category.name}}</a></li>
+                {% endfor %}
+              </ul>
+            
+            <a href="{% url 'taskform' %}"><button class=" ms-5 btn btn-info">+ Create task</button></a>
+                
+        </div>
+        <hr>
+        {% for item in task %}
+        <div class="w-50 mt-5 bg-warning text-center text-dark rounded p-2" id="container-2" >
+          
+            <div class="d-flex justify-content-between p-3" id="info-container-2 ">
+                <h3>{{item.name}}</h3>
+                <div class="dropdown">
+                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      Options
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item text-success" href="{% url 'taskcomplete' item.id %}">Done</a></li>
+                        <li><a class="dropdown-item text-danger" href="{% url 'edittask' item.id %}">Edit</a></li>
+                      
+
+                    </ul>
+                  </div>
+            </div>
+            <div class="d-flex justify-content-between p-3">
+                <p class="lead">Categroy: {{item.category}}!</p>
+                <p class="lead">Added: {{item.updated|timesince}}ago</p>
+            </div>
+          
+            
+        </div>
+        <p></p>
+        {% endfor %}
+
+      </section>
+</main>
+{% endblock content %}
